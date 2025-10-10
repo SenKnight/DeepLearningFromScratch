@@ -14,18 +14,19 @@ def function_1(x):
 
 def tangent_line(f, x):
     d = numerical_diff(f, x)
-    print(d)
+    print(f'{x}的斜率：{d}')
     y = f(x) - d*x
-    return lambda t: d*t + y
+    return lambda t: d*t + y # 这里返回倒数在x时的切线，参数等于t，斜率等于d，偏移值由t=x时确定（此时y=f(x)）
      
 x = np.arange(0.0, 20.0, 0.1)
 y = function_1(x)
 plt.xlabel("x")
 plt.ylabel("f(x)")
 
-tf = tangent_line(function_1, 5)
-y2 = tf(x)
+tf1 = tangent_line(function_1, 5)
+tf2 = tangent_line(function_1, 10)
 
 plt.plot(x, y)
-plt.plot(x, y2)
+plt.plot(x, tf1(x))
+plt.plot(x, tf2(x))
 plt.show()
